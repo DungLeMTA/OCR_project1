@@ -1,27 +1,27 @@
-string = 'Hello anh em nha !'
-emptystring = ''
+from PIL import Image
+import time
 
-for i in range(0, len(string)):
+#Read the two images
 
-    if string[i] == ' ':
-        emptystring = emptystring + ' '
-    else:
-        emptystring= emptystring+string[i]+str('\u0332')
+start = time.time()
 
-print(emptystring)
-print(string)
-x="the solution"
-print("\033[4m" + x + "\033[0m")
-from simple_colors import *
-a= green('hello anh em', 'underlined')
-print(a)
+image1 = Image.open('test1.png')
+# image1.show()
+image2 = Image.open('test2.png')
+# image2.show()
+image3 = Image.open('test3.png')
+# image3.show()
 
-# import required module
-import fontstyle
+#resize, first image
+image1_size = image1.size
+image2_size = image2.size
+image3_size = image3.size
+new_image = Image.new('RGB',(image1_size[0]+image2_size[0]+image3_size[0], image1_size[1]), (250,250,250))
+new_image.paste(image1,(0,0))
+new_image.paste(image2,(image1_size[0],0))
+new_image.paste(image3,(image1_size[0]+image2_size[0],0))
+new_image.save("merged_image.png","png")
+print('Thời gian là: %.3f'%(time.time()-start))
+new_image.show()
 
-# display formatted text
-print(fontstyle.apply('Hello anh em',
-                      'bold/Italic/UNDERLINE'))
 
-print(fontstyle.apply('GEEKSFORGEEKS',
-                      'bold/Italic/red/INVERSE/UNDERLINE/GREEN_BG'))
