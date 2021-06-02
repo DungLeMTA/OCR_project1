@@ -1,3 +1,5 @@
+import random
+
 letters = 'aAàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆfFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ0123456789!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~“”‘’ '
 dau = '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~“”‘’'
 dic = []
@@ -9,18 +11,23 @@ for j in mang:
         dic.append(j)
 f.close()
 
-f = open('All9.txt','r',encoding='utf-8')
-f1 = open('All10.txt','w',encoding='utf-8')
+f = open('All3.txt','r',encoding='utf-8')
+f1 = open('All4.txt','w',encoding='utf-8')
 str = f.read()
 mang = str.split('\n')
 temp = 1
 for i in range(0,len(mang)-1):
 
-    #
+    # j = random.randint(0, 500)
+    # if j == 1:
+    #     mang[i] = mang[i].upper()
+    #     print(i)
     # words = mang[i].split(' ')
     # count = len(words)
     # cau1 = ''
     # cau2 = ''
+    #
+    #
     # if count > 20:
     #     for j in range(0,20):
     #         cau1 += words[j] + ' '
@@ -28,19 +35,19 @@ for i in range(0,len(mang)-1):
     #         cau2 += words[j] + ' '
     # else:
     #     cau1 = mang[i]
-    #
-    # f1.writelines(cau1.strip()+'\n')
-    # if cau2 != '':
+    # if cau1.strip() != '':
+    #     f1.writelines(cau1.strip()+'\n')
+    # if cau2.strip() != '' and '\n':
     #     f1.writelines(cau2.strip() + '\n')
 
-    ''' xóa các kí tự ngoại lai
+
     # if mang[i].strip() != '':
     #     for j in mang[i]:
     #         if j not in letters:
     #             mang[i]=mang[i].replace(j,'')
     #             print('dòng ',i,' kí tự: ',j)
     #     f1.writelines(mang[i]+'\n')
-    '''
+
     ''' kiểm tra từ bị dính vào nhau
     
     word = mang[i].split(' ')

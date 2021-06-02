@@ -10,8 +10,8 @@ f.close()
 print(len(mang))
 f = open('image1000K/validation.txt', 'w', encoding='utf-8')
 
-count=1000000
-for i in range(1000000,1050001):
+count=1000001
+for i in range(1000000,len(mang)):
     a = str(count)
     if   count<10: a='0000000'+a
     elif count<100: a='000000'+a

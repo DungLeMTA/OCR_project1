@@ -2,20 +2,18 @@ from PIL import Image
 from PIL import ImageFont, ImageDraw
 import  random
 import multiprocessing
-from concurrent.futures import ThreadPoolExecutor
 import time
 
 from pyasn1_modules.rfc2315 import Data
 
-# dem = 1
+dem = 1
 def getSize(txt, font):
     testImg = Image.new('RGB', (1, 1))
     testDraw = ImageDraw.Draw(testImg)
     return testDraw.textsize(txt, font)
 
-def Data_Gen(fromfile,fonts,colorText,colorBackground,height,min_width,max_width,start):
+def Data_Gen(fromfile,fonts,colorText,colorBackground,height,min_width,max_width): #start
 
-    start1 = time.time()
     f = open(fromfile, 'r', encoding="utf8")
 
     str1 = f.read()
@@ -25,8 +23,8 @@ def Data_Gen(fromfile,fonts,colorText,colorBackground,height,min_width,max_width
     TONG = len(mang_data)-1
     # print(TONG)
     temp = 1
-    dem = start+1
-    print('Bắt đầu từ: ',start)
+    # dem = start+1
+    # print('Bắt đầu từ: ',start)
     for line in mang_data:
         i = 1
 
@@ -131,7 +129,7 @@ def Data_Gen(fromfile,fonts,colorText,colorBackground,height,min_width,max_width
             image_size = image.size
             new_image.paste(image, (coordinate_x, 0))
             coordinate_x += image_size[0]
-        # global dem
+        global dem
         new_image.save("./line_result/image" + str(dem) + ".png")
         print(dem)
         temp += 1
@@ -139,7 +137,6 @@ def Data_Gen(fromfile,fonts,colorText,colorBackground,height,min_width,max_width
 
     # print(thongke)
     print(min_width, max_width)
-    print("Tổng thời gian: %.5f"%(time.time()-start1))
 
 if __name__ == '__main__':
 
@@ -193,65 +190,40 @@ if __name__ == '__main__':
     min_width = 200
     height = 30
 
-    f = open('Test.txt', 'r', encoding="utf8")
+    # f = open('Test.txt', 'r', encoding="utf8")
+    #
+    # str1 = f.read()
+    # mang_data = str1.split('\n')
+    # f.close()
+    # TONG = len(mang_data) -1
 
-    str1 = f.read()
-    mang_data = str1.split('\n')
-    f.close()
-    TONG = len(mang_data) -1
-
+    start = time.time()
     font_Times = [fontname1, fontname2, fontname3, fontname4]
-    # Data_Gen('All_TIMES.txt',font_Times,colorText,colorBackground,height,min_width,max_width)
+    Data_Gen('All_TIMES.txt',font_Times,colorText,colorBackground,height,min_width,max_width)
     # p1 = multiprocessing.Process(target=Data_Gen, args=('All_TIMES.txt',font_Times,colorText,
     #                                                     colorBackground,height,min_width,max_width,0))
 
     font_Segoe = [fontname5, fontname6, fontname7, fontname8]
-    # Data_Gen('All_SEGOEUI.txt',font_Segoe,colorText,colorBackground,height,min_width,max_width)
+    Data_Gen('All_SEGOEUI.txt',font_Segoe,colorText,colorBackground,height,min_width,max_width)
     # p2 = multiprocessing.Process(target=Data_Gen, args=('All_SEGOEUI.txt',font_Segoe,colorText,
     #                                                     colorBackground,height,min_width,max_width,int(TONG*0.4)))
 
     font_Taho = [fontname9, fontname10, fontname11, fontname12]
-    # Data_Gen('All_TAHOMA.txt',font_Tahoma,colorText,colorBackground,height,min_width,max_width)
+    Data_Gen('All_TAHOMA.txt',font_Taho,colorText,colorBackground,height,min_width,max_width)
     # p3 = multiprocessing.Process(target=Data_Gen, args=('All_TAHOMA.txt',font_Taho,colorText,
     #                                                     colorBackground,height,min_width,max_width,int(TONG*0.6)))
 
     font_Hel = [fontname13, fontname14, fontname15, fontname16]
-    # Data_Gen('All_HELVETICA.txt',font_Hel,colorText,colorBackground,height,min_width,max_width)
+    Data_Gen('All_HELVETICA.txt',font_Hel,colorText,colorBackground,height,min_width,max_width)
     # p4 = multiprocessing.Process(target=Data_Gen, args=('All_HELVETICA.txt',font_Hel,colorText,
     #                                                     colorBackground,height,min_width,max_width,int(TONG*0.8)))
 
     font_Open = [fontname17, fontname18, fontname19, fontname20]
-    # Data_Gen('All_OPEN.txt',font_Open,colorText,colorBackground,height,min_width,max_width)
+    Data_Gen('All_OPEN.txt',font_Open,colorText,colorBackground,height,min_width,max_width)
+
+    print("Tổng thời gian là: %.5f"%(time.time()-start))
     # p5 = multiprocessing.Process(target=Data_Gen, args=('All_OPEN.txt',font_Open,colorText,
     #                                                     colorBackground,height,min_width,max_width,int(TONG*0.9)))
 
-    # start = time.time()
-    executor = ThreadPoolExecutor(max_workers=5)
-    future1 = executor.submit(Data_Gen, 'All_TIMES.txt',font_Times,colorText,colorBackground,height,min_width,
-                             max_width, 0)
-    future2 = executor.submit(Data_Gen, 'All_SEGOEUI.txt', font_Segoe, colorText, colorBackground, height, min_width,
-                             max_width, int(TONG*0.4))
-    future3 = executor.submit(Data_Gen, 'All_TAHOMA.txt', font_Taho, colorText, colorBackground, height, min_width,
-                             max_width, int(TONG*0.6))
-    future4 = executor.submit(Data_Gen, 'All_HELVETICA.txt', font_Hel, colorText, colorBackground, height, min_width,
-                             max_width, int(TONG*0.8))
-    future5 = executor.submit(Data_Gen, 'All_OPEN.txt', font_Open, colorText, colorBackground, height, min_width,
-                             max_width, int(TONG*0.9))
 
-
-    # p1.start()
-    # p2.start()
-    # p3.start()
-    # p4.start()
-    # p5.start()
-
-
-    # font = [fontname21, fontname22, fontname23, fontname24]
-    # Data_Gen('All_SEGOEUI.txt',font,colorText,colorBackground,height,min_width,max_width)
-    #
-    # font = [fontname25, fontname26, fontname27, fontname28]
-    # Data_Gen('All_CALIBRI.txt',font,colorText,colorBackground,height,min_width,max_width)
-    #
-    # font = [fontname29, fontname30, fontname31, fontname32]
-    # Data_Gen('All_OPEN.txt',font,colorText,colorBackground,height,min_width,max_width)
 
